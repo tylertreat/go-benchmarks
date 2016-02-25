@@ -1,2 +1,3 @@
 # go-benchmarks
-A few miscellaneous Go microbenchmarks.
+
+Benchmarks used in [So You Wanna Go Fast?](http://bravenewgeek.com/so-you-wanna-go-fast/).
