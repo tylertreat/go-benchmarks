@@ -19,6 +19,8 @@ package test
 import (
 	"runtime"
 	"sync/atomic"
+
+	"github.com/Workiva/go-datastructures/queue"
 )
 
 // roundUp takes a uint64 greater than 0 and rounds it up to the next
@@ -91,7 +93,7 @@ func (rb *RingBufferPadded) put(item interface{}, offer bool) (bool, error) {
 L:
 	for {
 		if atomic.LoadUint64(&rb.disposed) == 1 {
-			return false, ErrDisposed
+			return false, queue.ErrDisposed
 		}
 
 		n = rb.nodes[pos&rb.mask]
@@ -135,7 +137,7 @@ func (rb *RingBufferPadded) Get() (interface{}, error) {
 L:
 	for {
 		if atomic.LoadUint64(&rb.disposed) == 1 {
-			return nil, ErrDisposed
+			return nil, queue.ErrDisposed
 		}
 
 		n = rb.nodes[pos&rb.mask]
